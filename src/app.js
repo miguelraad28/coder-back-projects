@@ -1,16 +1,18 @@
 import express from "express";
 import { productsController } from "./controllers/ProductManager.js";
+import { cartsController } from "./controllers/CartManager.js";
 const app = express()
 
-app.listen(3001, () => {
+app.listen(8080, () => {
     console.log("Server up")
 })
 app.use(express.json())
-app.use(express.urlencoded({extended: true}))
+app.use(express.urlencoded({ extended: true }))
+
+// Product Routes
 app.post("/api/products", async (req, res) => {
     const response = await productsController.addProduct(req.body)
-    if (response.pending) return res.json(response)
-    res.json(response)
+    return res.json(response)
 })
 app.get("/api/products", async (req, res) => {
     if (req.query?.limit) {
@@ -24,13 +26,28 @@ app.get("/api/products", async (req, res) => {
 app.get("/api/products/:pid", async (req, res) => {
     const pid = req.params.pid
     const response = await productsController.getProductById(pid)
-    if (!product) return res.json(response)
     return res.json(response)
 })
 app.delete("/api/products/:pid", async (req, res) => {
     const pid = req.params.pid
     const response = await productsController.deleteProduct(pid)
-    if (response.pending) return res.json(response)
-    res.json(response)
+    return res.json(response)
 })
 
+app.put("/api/products/:pid", async (req, res) => {
+    const pid = req.params.pid
+    const response = await productsController.updateProduct(pid, req.body)
+    return res.json(response)
+})
+
+// Cart Routes
+
+app.post("/api/carts", async (req, res) => {
+    const response = await cartsController.newCart(req.body)
+    return res.json(response)
+})
+app.get("/api/carts/:cid", async (req, res) => {
+    const cid = req.params.cid
+    const response = await cartsController.getCartById(cid)
+    return res.json(response)
+})
