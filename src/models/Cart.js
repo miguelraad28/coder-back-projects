@@ -1,10 +1,9 @@
 export default class Cart {
     products
     static idCounter = 0
-    constructor(products) {
-        
+    constructor() {
         const newId = ++Cart.idCounter
-        this.products = products
+        this.products = []
         this.id = newId.toString()
     }
 }

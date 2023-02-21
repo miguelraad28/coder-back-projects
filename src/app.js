@@ -43,11 +43,17 @@ app.put("/api/products/:pid", async (req, res) => {
 // Cart Routes
 
 app.post("/api/carts", async (req, res) => {
-    const response = await cartsController.newCart(req.body)
+    const response = await cartsController.newCart()
     return res.json(response)
 })
 app.get("/api/carts/:cid", async (req, res) => {
     const cid = req.params.cid
     const response = await cartsController.getCartById(cid)
+    return res.json(response)
+})
+app.post("/api/carts/:cid/products/:pid", async(req, res) => {
+    const cid = req.params.cid
+    const pid = req.params.pid
+    const response = await cartsController.addProductToCart(cid, pid)
     return res.json(response)
 })
