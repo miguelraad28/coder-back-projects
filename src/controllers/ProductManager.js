@@ -7,24 +7,17 @@ class ProductManager {
         this._products = []
         this._path = _path
     }
-    async addProduct(product) {
-        const {title, description, price, stock, code, thumbnail} = product
+    async addProduct(newProduct) {
+        const {title, description, price, thumbnail, code, stock, status} = newProduct
         try {
             const data = await readFile(this._path, "utf-8")
             //  si la collection NO esta VACIA traemos los datos.
             if (data !== "") this._products = JSON.parse(data)
 
-            if (this._products.find(_product => _product.code === code)) {
+            if (this._products.find(_product => _product.code === newProduct.code)) {
                 return ({message:"Ya existe un producto con este código.", pending: true});
             } else {
-                const product = new Product(
-                    title,
-                    description,
-                    price,
-                    thumbnail,
-                    code,
-                    stock
-                );
+                const product = new Product(title, description, price, thumbnail, code, stock, status);
                 this._products.push(product);
                 await writeFile(this._path, JSON.stringify(this._products));
                 return ({message:"Producto creado", product: product});
