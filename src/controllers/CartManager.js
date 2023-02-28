@@ -38,14 +38,13 @@ class CartManager {
         try {
             const data = await readFile(this._path, 'utf-8')
             this._carts = JSON.parse(data)
-            //console.log(this._carts[1])
             const _cart = this._carts.find(_cart => _cart.id === cid)
             const newValues = this._carts.find(_cart => _cart.id === cid)
+            const products = JSON.parse(await readFile("./src/database/products.json", 'utf-8'))
+            if(!products.some(product => product.id === pid)) return ({message: "El producto que intentas agregar, no existe", pending: true})
             if(_cart.products.find(product => product.id === pid)){
                 const productToAdd = newValues.products.find(product => product.id === pid)
-                
                 productToAdd.quantity = ++productToAdd.quantity
-                
                 Object.assign(_cart, newValues)
                 await writeFile(this._path, JSON.stringify(this._carts))
             }else{

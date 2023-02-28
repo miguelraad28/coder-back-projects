@@ -9,11 +9,16 @@ productsRouter.post("/", async (req, res) => {
 })
 productsRouter.get("/", async (req, res) => {
     const products = await productsController.getProducts(req.query.limit)
-    res.json(products)
+    const product = products.map(e => e = e)
+    res.set("Content-Type", "text/css", "text/html");
+    res.render("productsList", {
+        title: "Productos",
+        product
+    })
 })
 productsRouter.get("/:pid", async (req, res) => {
-    const products = await productsController.getProductById(req.params.pid)
-    res.json(products)
+    const product = await productsController.getProductById(req.params.pid)
+    res.render("productDetail", {...product})
 })
 productsRouter.put("/:pid", async (req, res) => {
     const response = await productsController.updateProduct(req.params.pid, req.body)

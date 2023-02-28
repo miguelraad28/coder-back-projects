@@ -8,17 +8,18 @@ class ProductManager {
         this._path = _path
     }
     async addProduct(newProduct) {
-        const {title, description, price, thumbnail, code, stock, status} = newProduct
+        const {title, description, price, thumbnail, code, stock, category, status} = newProduct
         try {
             const data = await readFile(this._path, "utf-8")
             //  si la collection NO esta VACIA traemos los datos.
             if (data !== "") this._products = JSON.parse(data)
+            console.log(category)
             if (this._products.find(_product => _product.code === newProduct.code)) {
                 return ({message:"Ya existe un producto con este código.", pending: true});
-            }else if(title === undefined || description === undefined || code === undefined || stock === undefined){
+            }else if(title === undefined || description === undefined || code === undefined || stock === undefined || category === undefined){
                 return({message: "Todos los campos (Menos status y thumbnail) son OBLIGATORIOS", pending: true})
             }else {
-                const product = new Product(title, description, price, thumbnail, code, stock, status);
+                const product = new Product(title, description, price, thumbnail, code, stock, category, status);
                 this._products.push(product);
                 await writeFile(this._path, JSON.stringify(this._products));
                 return ({message:"Producto creado", product: product});
@@ -34,7 +35,6 @@ class ProductManager {
             if(limit){
                 this._products = JSON.parse(await readFile(this._path, 'utf-8'))
                 const productsWithLimitQuery = this._products.slice(0, Number(limit))
-                console.log(productsWithLimitQuery)
                 return (productsWithLimitQuery)
             }else{
                 this._products = await readFile(this._path, 'utf-8')
