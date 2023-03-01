@@ -37,9 +37,10 @@ form.addEventListener('submit', async (event) => {
     }
     socket.emit("addProduct", newProduct)
 });
+const productsContainer = document.getElementsByClassName("productsContainer")
 socket.on("refreshProducts", (products) => {
     console.log(products)
-    const productsContainer = document.getElementsByClassName("productsContainer")
+    console.log(productsContainer)
     productsContainer.innerHTML = ``
     
 })
