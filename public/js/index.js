@@ -37,11 +37,11 @@ form.addEventListener('submit', async (event) => {
     }
     socket.emit("addProduct", newProduct)
 });
-const productsContainer = document.getElementById("productsContainer")
+const productsListCreateContainer = document.getElementById("productsListCreateContainer")
 socket.on("refreshProducts", (products) => {
-    productsContainer.innerHTML = ``
+    productsListCreateContainer.innerHTML = ``
     products.map(product => {
-        productsContainer.innerHTML += `
+        productsListCreateContainer.innerHTML += `
         <div class="productCard">
         <h1>
         ${product.title}

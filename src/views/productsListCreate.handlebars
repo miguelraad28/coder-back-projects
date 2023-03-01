@@ -1,0 +1,22 @@
+<div class="productsFormAndContainer">
+    <div class="productFormCreator">
+        <h1>CREAR PRODUCTO NUEVO</h1>
+        <form id="createNewProductFrom">
+            <input required placeholder="NOMBRE DEL PRODUCTO" name="title" type="text">
+            <textarea required placeholder="DESCRIPCIÓN" name="description"></textarea>
+            <input required placeholder="MINIATURAS" name="thumbnail" type="text">
+            <input required placeholder="STOCK" name="stock" type="number">
+            <input required placeholder="PRECIO" name="price" type="number">
+            <input required placeholder="CÓDIGO DE PRODUCTO" name="code" type="number">
+            <input required placeholder="CATEGORÍA" name="category" type="text">
+            <label>STATUS</label>
+            <input name="status" type="checkbox">
+            <button type="submit">CREAR PRODUCTO</button>
+        </form>
+    </div>
+    <div id="productsListCreateContainer">
+
+    </div>
+</div>
+<script src="/socket.io/socket.io.js"></script>
+<script src="../js/index.js"></script>

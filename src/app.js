@@ -33,6 +33,14 @@ io.on("connection", async(socket) => {
     io.sockets.emit("refreshProducts", products)
 });
 
+app.get("/", async(req, res) => {
+    if(req.query.limit){
+        const products = await productsController.getProducts(req.query.limit)
+        res.json(products)
+    }
+   const products = await productsController.getProducts()
+    res.render("productsList", {title: "Products", products})
+})
 // // Product Route
 app.use("/api/products", productsRouter)
 
