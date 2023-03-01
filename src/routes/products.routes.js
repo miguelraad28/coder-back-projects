@@ -8,10 +8,9 @@ productsRouter.post("/", async (req, res) => {
     res.json(response)
 })
 productsRouter.get("/", async (req, res) => {
-    const products = await productsController.getProducts(req.query.limit)
+    //const products = await productsController.getProducts(req.query.limit)
     res.render("productsList", {
-        title: "Productos",
-        products
+        title: "Products"
     })
 })
 productsRouter.get("/:pid", async (req, res) => {

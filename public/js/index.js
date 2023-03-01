@@ -37,10 +37,18 @@ form.addEventListener('submit', async (event) => {
     }
     socket.emit("addProduct", newProduct)
 });
-const productsContainer = document.getElementsByClassName("productsContainer")
+const productsContainer = document.getElementById("productsContainer")
 socket.on("refreshProducts", (products) => {
-    console.log(products)
-    console.log(productsContainer)
     productsContainer.innerHTML = ``
-    
+    products.map(product => {
+        productsContainer.innerHTML += `
+        <div class="productCard">
+        <h1>
+        ${product.title}
+        </h1>
+        <h2>${product.price}</h2>
+        <a href="/api/products/${product.id}"><button class="blueButton">VER DETALLE</button></a>
+        </div>
+        `
+    });
 })

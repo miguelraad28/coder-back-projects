@@ -14,17 +14,7 @@
             <button type="submit">CREAR PRODUCTO</button>
         </form>
     </div>
-    <div class="productsContainer">
-        {{#each products}}
+    <div id="productsContainer">
         
-        <div class="productCard">
-            <h1>
-                {{this.title}}
-            </h1>
-            <h2>{{this.price}}</h2>
-            <a href="/api/products/{{id}}"><button class="blueButton">VER DETALLE</button></a>
-        </div>
-        
-        {{/each}}
     </div>
 </div>

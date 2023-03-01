@@ -13,7 +13,6 @@ class ProductManager {
             const data = await readFile(this._path, "utf-8")
             //  si la collection NO esta VACIA traemos los datos.
             if (data !== "") this._products = JSON.parse(data)
-            console.log(category)
             if (this._products.find(_product => _product.code === newProduct.code)) {
                 return ({message:"Ya existe un producto con este código.", pending: true});
             }else if(title === undefined || description === undefined || code === undefined || stock === undefined || category === undefined){

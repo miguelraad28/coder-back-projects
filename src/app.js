@@ -22,14 +22,15 @@ app.set("view engine", "handlebars");
 app.use(express.static("public"));
 
 const io = new Server(httpServer)
-io.on("connection", socket => {
+io.on("connection", async(socket) => {
     console.log("New socket connected");
     socket.on("addProduct", async(product) => {
         await productsController.addProduct(product)
         const products = await productsController.getProducts()
-        console.log(products)
         io.sockets.emit("refreshProducts", products)
     });
+    const products = await productsController.getProducts()
+    io.sockets.emit("refreshProducts", products)
 });
 
 // // Product Route
