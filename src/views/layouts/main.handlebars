@@ -5,68 +5,17 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-        }
-
-        #root {
-            display: flex;
-            justify-content: center;
-            margin-top: 50px;
-        }
-
-        .productsContainer {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            padding: 25px;
-            border: 2px solid blue;
-            width: 80%;
-            margin: auto;
-        }
-
-        .productCard {
-            border: 2px solid red;
-            display: flex;
-            flex-direction: column;
-            align-content: center;
-            padding: 15px;
-        }
-
-        .blueButton {
-            cursor: pointer;
-            padding: 7px 12px;
-            background-color: aqua;
-            border-radius: 5px;
-            border: 0;
-        }
-
-        .blueButton:hover {
-            background-color: rgb(147, 255, 255);
-        }
-
-        .productDetail {
-            border: 2px solid yellowgreen;
-            padding: 15px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            text-align: center;
-        }
-    </style>
+    <link rel="stylesheet" href="../styles/style.css">
     <title>{{title}}</title>
 </head>
 
 <body>
-    <h1>SOCKETS</h1>
     <div id="root">
+        
         {{{body}}}
     </div>
-    <script src="/socket.io/socket.io.js">
-        const socket = io()        
-    </script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="../js/index.js"></script>
 </body>
 
 </html>
